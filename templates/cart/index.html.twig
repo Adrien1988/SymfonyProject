@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Panier
+{% endblock %}
+
+{% block body %}
+
+	<h1 class="text-center">Votre Panier</h1>
+
+	{% if items %}
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Produit</th>
+					<th>Prix</th>
+					<th>Quantité</th>
+					<th>Total</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for item in items %}
+					<tr>
+						<td>{{ item.produit.nom }}</td>
+						<td>{{ item.produit.prix }}€</td>
+						<td>
+							<a href="{{ path('cart_remove', {'id': item.produit.id}) }}" class="btn-sm btn-warning mx-1">
+								<i class="fas fa-minus-square"></i>
+							</a>
+							{{ item.quantite }}
+							<a href="{{ path('cart_add', {'id': item.produit.id}) }}" class="btn-sm btn-success mx-1">
+								<i class="fas fa-plus-square"></i>
+							</a>
+
+						</td>
+						<td>{{ item.produit.prix * item.quantite}}€</td>
+						<td>
+							<a href="{{ path('cart_delete', {'id': item.produit.id}) }}" class="btn-sm btn-danger mx-1">
+								<i class="fas fa-trash"></i>
+							</a>
+						</td>
+					</tr>
+				{% endfor %}
+
+			</tbody>
+			<tfoot>
+				<tr>
+					<td colspan="3">Total :</td>
+					<td>{{ total }}€</td>
+					<td>
+						<a href="{{ path('cart_delete_all') }}" class="btn btn-danger">
+							Vider le panier</a>
+					</td>
+				</tr>
+			</tfoot>
+		</table>
+		<div class="container">
+			<div class="row">
+				<a href="{{ path('app_product') }}" class="btn btn-primary col-auto me-auto ">
+					<i class="fas fa-chevron-circle-left"></i>
+					Retour
+				</a>
+				<a href="{{ path('cart_payed') }}" class="btn btn-success col-auto">Payer</a>
+			</div>
+		</div>
+
+
+	{% else %}
+
+		<p>Votre panier est vide.</p>
+
+		<a href="{{ path('app_product') }}" class="btn btn-primary">
+			<i class="fas fa-chevron-circle-left"></i>
+			Retour
+		</a>
+
+	{% endif %}
+
+{% endblock %}

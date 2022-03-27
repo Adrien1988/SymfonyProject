@@ -1,0 +1,55 @@
+{% extends "base.html.twig" %}
+
+{% block title %}BACKOFFICE | Contacts
+{% endblock %}
+
+{% block body %}
+
+	<h1 class="display-4 text-center my-4">
+		{% if editMode %}
+			BACKOFFICE | Modification du contact
+		{% else %}
+			BACKOFFICE | Création d'une prise de contact
+		{% endif %}
+
+	</h1>
+	<div class="container">
+		{{ form_start(formContact) }}
+
+		<div class="form-group">
+    {{ form_label(formContact.prenom, 'Prénom') }}
+  {{ form_widget(formContact.prenom, {'attr':{'class':'form-control mb-2'}
+    
+  }) }}
+  {{ form_errors(formContact.prenom) }}
+  </div>
+		<div class="form-group">
+    {{ form_label(formContact.nom,'Nom de famille') }}
+  {{ form_widget(formContact.nom, {
+    'attr':{'class':'form-control mb-2'}
+  }) }}
+  {{ form_errors(formContact.nom) }}
+  </div>
+		<div class="form-group">
+    {{ form_row(formContact.email,{
+    'attr':{'class':'form-control mb-2'}
+  } ) }}
+    
+    </div>
+		<div class="form-group">{{ form_row(formContact.contenu, {
+    'attr':{'class':'form-control mb-2'}
+  }) }}</div>
+
+		<button type="submit" class="btn btn-primary mt-2">
+
+			{% if editMode %}
+				Enregistrer les modifications
+			{% else %}
+				Créer la prise de contact
+			{% endif %}
+
+		</button>
+
+		{{ form_end(formContact) }}
+	</div>
+{% endblock %}

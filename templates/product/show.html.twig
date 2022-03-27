@@ -1,0 +1,82 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+	<section class="row article">
+		<article class="col-md-6 mx-auto text-center border border-dark mb-3 p-3 mt-3 mr-1">
+
+			<h2>
+				{{ produit.nom}}
+			</h2>
+
+			<div class="metadata">
+
+				{{ produit.updatedAt|date(" d/m/Y à H:i:s ") }}
+
+				{{ produit.categorie.titre}}
+
+			</div>
+
+			<div class="content">
+				<img src="{{ asset('images/produit/' ~ produit.image) }}" alt="" class="img-fluid">
+
+				{{ produit.description|raw }}
+
+				<p>{{ produit.prix }}€</p>
+
+				<a href="{{ path('cart_add', {'id': produit.id}) }}" class="card-link btn btn-primary mb-5">Ajouter au panier</a>
+
+			</div>
+
+		</article>
+
+	</section>
+
+	<h2 class="text-center mx-auto m-3">Commentaires</h2>
+
+	<section id="commentaire" class="col-md-10 mx-auto">
+
+		{% if app.user %}
+			<div class="container">
+
+				{{ form_start(commentaireForm) }}
+
+				{{ form_widget(commentaireForm.contenu, {
+  'attr':{
+    'placeholder': "Poster un commentaire", 'class': 'form-control mb-2'
+  }
+})}}
+				<button type="submit" class="btn btn-primary mt-2 mb-3">Envoyer</button>
+
+				{{ form_end(commentaireForm) }}
+			</div>
+
+		{% else %}
+
+			<a href="path('app_login')">Veuillez vous connecter</a>
+			pour poster un commentaire.
+		{% endif %}
+
+		{% for commentaire in produit.commentaire %}
+
+			<div class="commentaire">
+				<div class="row">
+					<div class="col-md-3">
+						{{ commentaire.auteur.username}}
+						<small>
+							{{ commentaire.createdAt|date('d/m/y à H:i:s') }}
+						</small>
+					</div>
+					<div class="col-md-9">
+						{{ commentaire.contenu|raw }}
+					</div>
+				</div>
+			</div>
+			<hr>
+
+		{% endfor %}
+
+	</section>
+
+	<a href="{{ path('app_product') }}" class="btn btn-primary ">Retour à la liste des produits</a>
+{% endblock %}

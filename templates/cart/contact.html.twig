@@ -1,0 +1,33 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+	Contact
+{% endblock %}
+
+{% block body %}
+
+	{% for message in app.flashes('success') %}
+
+		<div class="alert alert-success text-center">{{message}}</div>
+
+	{% endfor %}
+
+	<h1 class="text-center">formulaire de contact</h1>
+	<div class="container ">
+		{{form_start(formContact)}}
+
+		<div class="form-group">{{form_row(formContact.nom, {'attr':{'class':'form-control'}})}}</div>
+		<div class="form-group">{{form_row(formContact.prenom, {'attr':{'class':'form-control'}})}}</div>
+		<div class="form-group">{{form_row(formContact.email, {'attr':{'class':'form-control'}})}}</div>
+		<div class="form-group">{{form_row(formContact.contenu, {'attr':{'class':'form-control'}})}}</div>
+		<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+			<button type="submit" class="btn btn-success mt-2 ">Envoyer</button>
+		</div>
+		{{form_end(formContact)}}
+	</div>
+
+	<a href="{{ path('home') }}" class="btn btn-primary mt-3">
+		<i class="fas fa-chevron-circle-left"></i>
+		Accueil
+	</a>
+{% endblock %}

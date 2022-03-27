@@ -1,0 +1,21 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+  Acceuil
+{% endblock %}
+
+
+{% block body %}
+
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://backoffice.avoriaz.com/wp-content/uploads/2021/03/Dimension-header-2021-06-08T130034.625.png);">
+  <div class="container">
+    <h1>{{ title }}</h1>
+    <p>Site de vente en ligne de matériel d'archerie neuf et d'occasion</p>
+  </div>
+</div>
+	
+	{# j'affiche dans une balise h1 la variable title que j'ai récupéré depuis le BlogController dans la méthode home() #}
+
+	
+
+{% endblock body %}

@@ -1,0 +1,19 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+Erreur 404
+{% endblock %}
+
+{% block body %}
+
+<div class="p-5 mb-4 bg-light rounded-3">
+      <div class="container-fluid py-5">
+        <h1 class="display-5 fw-bold">Article inexistant !</h1>
+        <p class="col-md-8 fs-4">Malheureusement, cet article n'existe pas ! Cliquez sur le bouton pour retourner à la liste des articles.</p>
+        <a class="btn btn-primary btn-lg" href="{{ path('app_product') }}">Retour aux articles</a>
+
+      </div>
+    </div>
+
+
+{% endblock %}

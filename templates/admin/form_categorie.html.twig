@@ -1,0 +1,38 @@
+{% extends "base.html.twig" %}
+
+{% block title %}BACKOFFICE | Catégories
+{% endblock %}
+
+{% block body %}
+
+	<h1 class="display-4 text-center my-4">
+		{% if editMode %}
+			BACKOFFICE | Modification de la catégorie
+		{% else %}
+			BACKOFFICE | Ajout d'une catégorie
+		{% endif %}
+
+	</h1>
+
+	<div class="container">
+
+		{{ form_start(formCategorie) }}
+
+
+		<div class="form-group">{{ form_row(formCategorie.titre, {'attr':{'class':'form-control mb-2'}}) }}</div>
+
+
+		<button type="submit" class="btn btn-primary mt-2">
+
+			{% if editMode %}
+				Enregistrer les modifications
+			{% else %}
+				Ajouter la catégorie
+			{% endif %}
+
+		</button>
+
+		{{ form_end(formCategorie) }}
+	</div>
+
+{% endblock %}

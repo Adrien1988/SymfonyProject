@@ -1,0 +1,39 @@
+{% extends "base.html.twig" %}
+
+{% block title %}BACKOFFICE | Produits
+{% endblock %}
+
+{% block body %}
+
+	<h1 class="display-4 text-center my-4">
+		{% if editMode %}
+			BACKOFFICE | Modification du Produit
+		{% else %}
+			BACKOFFICE | Ajout d'un Produit
+		{% endif %}
+
+	</h1>
+	<div class="container">
+		{{ form_start(formProduit) }}
+
+		<div class="form-group">{{ form_row(formProduit.nom, {'attr':{'class':'form-control mb-2'}}) }}</div>
+		<div class="form-group">{{ form_row(formProduit.description, {'attr':{'class':'form-control mb-2'}}) }}</div>
+		<div class="form-group">{{ form_row(formProduit.categorie, {'attr':{'class':'form-control mb-2'}}) }}</div>
+		<div class="form-group">{{ form_row(formProduit.prix, {'attr':{'class':'form-control mb-2'}}) }}€</div>
+		<div class="form-group">{{ form_row(formProduit.imageFile,{'attr':{'class':'form-control mb-2'}}) }}</div>
+		<div class="form-group">{{ form_row(formProduit.auteur, {'attr':{'class':'form-control mb-2'}}) }}</div>
+
+
+		<button type="submit" class="btn btn-primary mt-2">
+
+			{% if editMode %}
+				Enregistrer les modifications
+			{% else %}
+				Ajouter le produit
+			{% endif %}
+
+		</button>
+
+		{{ form_end(formProduit) }}
+	</div>
+{% endblock %}

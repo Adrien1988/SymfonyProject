@@ -1,0 +1,41 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+	Bonjour
+	{{ app.user.username }}
+
+	<table class="table">
+
+		<thead>
+			<th>Titre</th>
+			<th>Description</th>
+			<th>Prix</th>
+			<th>Image</th>
+			<th>Categorie</th>
+			<th>Actions</th>
+
+		</thead>
+		<tbody>
+			{% for data in produit %}
+				{# on peut aussi utiliser {% for comment in app.user.comments %} #}
+
+				<tr>
+					<td>{{data.nom}}</td>
+					<td>{{data.description}}</td>
+					<td>{{data.prix}}€</td>
+					<td><img src="{{ asset('images/produit/' ~ data.image) }}" alt="" style="width: 100px;"></td>
+					<td>{{data.categorie.titre}}</td>
+					<td>
+						<a href="{{ path('product_show', {'id': data.id}) }}" class="btn btn-primary">Détails</a>
+						<a href="{{ path('product_edit', {'id': data.id}) }}" class="btn btn-success">Editer l'article</a>
+					</td>
+				</tr>
+
+			{% endfor %}
+		</tbody>
+
+	</table>
+
+
+{% endblock %}

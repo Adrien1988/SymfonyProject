@@ -1,0 +1,62 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Gestion des utilisateurs
+{% endblock %}
+
+{% block body %}
+
+	{% for message in app.flashes('success') %}
+		<div class="text-center alert alert-success">
+			{{ message }}
+		</div>
+	{% endfor %}
+
+	<a href="{{ path('admin_new_user') }}" class="btn btn-success mb-3">Créer un nouvel utilisateur</a>
+
+	<table class="table table-bordered text-center">
+
+		<thead>
+			<tr>
+				{% for colonne in colonnes %}
+					{% if colonne != "id" %}
+						<th>{{ colonne }}</th>
+					{% endif %}
+					{# cette condition permet d'afficher toutes les colonnes sauf l'id #}
+				{% endfor %}
+				<th>Editer</th>
+				<th>Supprimer</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			{% for data in user %}
+				<tr>
+					<td>{{data.email}}</td>
+					<td>
+						{% for role in data.roles %}
+							{{ role }}
+							<br>
+							{# j'ai besoin d'une boucle for pour afficher les rôles de l'utilisateur car data.roles est un tableau #}
+						{% endfor %}
+					</td>
+					<td>******</td>
+					{# à la place d'afficher un mot de passe hashé, j'affiche des astérisques #}
+					<td>{{data.username}}</td>
+				
+					<td>
+						<a href="{{ path('admin_edit_user', {'id': data.id}) }}" class="btn btn-warning text-dark">
+							<i class="fa fa-edit"></i>
+						</a>
+					</td>
+					<td>
+						<a href="{{ path('delete_user', {'id': data.id}) }}" class="btn btn-danger text-dark">
+							<i class="fas fa-trash-alt"></i>
+						</a>
+					</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+  <a href="{{ path('app_admin') }}" class="btn btn-primary"><i class="fas fa-chevron-circle-left"></i>Retour</a>
+{% endblock %}
